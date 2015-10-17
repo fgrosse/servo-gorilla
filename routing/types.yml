@@ -1,0 +1,15 @@
+types:
+    servo.routing.loader:
+        package: github.com/fgrosse/servo-gorilla/routing
+        type:    Loader
+
+    servo.routing.router:
+        package: github.com/fgrosse/servo-gorilla/routing
+        type:    http.Handler
+        factory: NewRouter
+        args:
+            - @servo.routing.loader
+            - @container
+
+    kernel.http_handler:
+        alias: @servo.routing.router::ServeHTTP
